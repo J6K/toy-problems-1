@@ -9,41 +9,50 @@ var searchInsert = function(nums, target) {
   var end = nums.length - 1
   var half
 
+  if (nums[0] >= target) {
+    return 0
+  } else if (nums[nums.length - 1] < target) {
+    return nums.length
+  }
+
   while (searching) {
     if (start === end) {
       break
     }
 
     // find half way index
-    half = start + Math.floor(nums.length / 2)
+    half = start + Math.floor((end - start + 1) / 2)
 
     // if half way point is target
     if (nums[half] === target) {
       return half
-    } else if (nums[half] < target) {
-      start = half
-    } else (nums[half] > target) {
+    }
+
+    // if start is target
+    if (nums[start] === target) {
+      return start
+    }
+
+    // if end is target
+    if (nums[end] === target) {
+      return end
+    }
+
+    // if start and end are right next to each other, stop searching
+    if (end - start === 1) {
+      searching = false
+    }
+
+    // if half way point is greater than target, set the end to half way point
+    // otherwise set start to half
+    if (nums[half] > target) {
       end = half
+    } else {
+      start = half
     }
   }
 
-  if (nums[start] < target) {
-    return start
-  } else {
-    return start + 1
-  }
+  // at this point, we know it fits between the start and end,
+  // and the start and end are right next to each other, so therefore we return the ending index.
+  return end
 }
-
-// arr = 1, 3
-//          |
-// Math.floor(arr.length / 2) => 1
-
-// arr = 3
-
-// arr = 1, 2, 3, 5
-//             |
-// Math.floor(arr.length / 2) => 2
-
-// arr = 1, 2, 3, 4, 5
-//             |
-// Math.floor(arr.length / 2) => 2
