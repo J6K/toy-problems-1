@@ -1,17 +1,14 @@
 var hasCycle = function(linkedList){
-  var a = linkedList.head;
-  var b = linkedList.head;
+  var a = linkedList;
+  var b = linkedList;
 
-  while (true) {
-    if (b === null || b.next === null) {
-      return false;
-    }
-
-    b = b.next.next;
+  while (a.next && b.next && b.next.next) {
     a = a.next;
-
-    if (b === a) {
+    b = b.next.next;
+    if (a === b) {
       return true;
     }
   }
+  
+  return false;
 };
