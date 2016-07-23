@@ -1,0 +1,1 @@
+Write a program to sort a stack such that the smallest items are on the top. You can use an aditional temporary stack, but you may not copy the elements into any other data structure (like an array). The stack supports the following operations: `push`, `pop`, `peek`, and `isEmpty`.
